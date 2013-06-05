@@ -1,3 +1,5 @@
+var affix_desktop = 160;
+
 $(document).ready(function(){
 	var hash = window.location.hash;
 	var map_loaded = false;
@@ -5,10 +7,6 @@ $(document).ready(function(){
 	if (hash) {
 		$("#nav .nav a[href='"+hash+"']").trigger("click");
 	}
-	
-	$("#front-slide").carousel('cycle');
-
-	$("#nav-container").affix({offset: {top : setAffix}});
 	
 	$("#nav .nav").on("shown", function(e){
 		var pos = $($(e.target).attr("href")).position().top - 50;
@@ -32,7 +30,10 @@ $(document).ready(function(){
 					target.addClass("in").show();
 			});
 			
-			$("body").css("margin-top", 48);
+			// move everything down to accomodate the info bar
+			affix_desktop = 160;
+			$("body").css("margin-top", 40);
+			
 			$("#badbrowser").show().find(".ie8").show();
 		} else if ($.browser.version < 8) {
 			$("#badbrowser .ie7").show();
@@ -40,6 +41,8 @@ $(document).ready(function(){
 		}
 	}
 	
+	$("#front-slide").carousel('cycle');
+	$("#nav-container").affix({offset: {top : setAffix}});
 	
 });
 
@@ -48,7 +51,7 @@ var setAffix = function() {
 	var offset; // amount to offset the top by
 	
 	if (width > 767)
-		offset = 160;
+		offset = affix_desktop;
 	else if (width > 600)
 		offset = 125;
 	else

@@ -7,7 +7,7 @@ body {
 	position: fixed;
 	top: 0;
 	width: 100%;
-	min-height: 30px;
+	height: 24px;
 	z-index: 2000;
 }
 #badbrowser,.ie7, .ie8 {
@@ -78,6 +78,7 @@ body {
 }
 .affix-top {
 	margin-top: 160px;
+	margin-top: 200px\9;
 	position:  absolute;
 	top: 0;
 }
