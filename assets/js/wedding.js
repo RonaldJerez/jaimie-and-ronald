@@ -9,14 +9,24 @@ $(document).ready(function(){
 	}
 	
 	$("#nav .nav").on("shown", function(e){
-		var pos = $($(e.target).attr("href")).position().top - 50;
+		var target = $(e.target).attr("href");
+		var pos = $(target).position().top - 50;
+		
 		$("html, body").animate({scrollTop: pos}, 300);
 		
-		if (!map_loaded && $(e.target).attr("href") == "#info") {
+		// analytics tracking
+		ga("send", "event", {"eventCategory": "Section View", "eventAction": target.substring(1)});
+		
+		if (!map_loaded && target == "#info") {
 			$("#map").html('<iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="http://maps.google.com/maps/ms?t=m&amp;msa=0&amp;msid=213480164619931622304.0004dcb02d7385eac6315&amp;source=embed&amp;ie=UTF8&amp;ll=40.51928,-74.347143&amp;spn=0.027861,0.045748&amp;z=14&amp;output=embed"></iframe>');
 			map_loaded = true;
 		}
 	});
+	
+	/*$(".photo").on("click", function(){
+		
+	});*/
+
 	
 	// internet explorer always causing trouble
 	if ($.browser.msie) {
@@ -44,6 +54,10 @@ $(document).ready(function(){
 	$("#front-slide").carousel('cycle');
 	$("#nav-container").affix({offset: {top : setAffix}});
 	
+}).on("viewphoto", function(e, data){
+	// tracking photo view
+	var info = data.split("/");
+	ga("send", "event", {"eventCategory": "Photo View", "eventAction": info[1], "eventLabel": info[2]});
 });
 
 var setAffix = function() {

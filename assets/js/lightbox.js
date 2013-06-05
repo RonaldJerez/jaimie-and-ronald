@@ -207,6 +207,7 @@ lightbox = new Lightbox options
       };
       preloader.src = this.album[imageNumber].link;
       this.currentImageIndex = imageNumber;
+      $(document).trigger("viewphoto", this.album[imageNumber].link);
     };
 
     Lightbox.prototype.sizeOverlay = function() {
