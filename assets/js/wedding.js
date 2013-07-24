@@ -23,11 +23,6 @@ $(document).ready(function(){
 		}
 	});
 	
-	/*$(".photo").on("click", function(){
-		
-	});*/
-
-	
 	// internet explorer always causing trouble
 	if ($.browser.msie) {
 		if ($.browser.version == 8) {
